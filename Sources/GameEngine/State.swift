@@ -1,14 +1,14 @@
 import ReSwift
 
-struct AppState: StateType {
+public struct AppState: StateType {
     init() {
         self.gameState = .playing(PlayingState())
     }
 
-    var gameState: GameState
+    public var gameState: GameState
 }
 
-enum GameState {
+public enum GameState {
     case playing(PlayingState)
     case finished(FinishedState)
 
@@ -18,7 +18,7 @@ enum GameState {
     }
 }
 
-struct PlayingState {
+public struct PlayingState {
     init() {
         self.playerTurn = .nought
         self.board = [
@@ -28,12 +28,12 @@ struct PlayingState {
         ]
     }
 
-    var playerTurn: Player
+    public var playerTurn: Player
 
-    var board: [CellValue]
+    public var board: [CellValue]
 }
 
-enum Player {
+public enum Player {
     case nought, cross
     
     /// Returns the other player than the current (self).
@@ -46,11 +46,11 @@ enum Player {
 }
 
 /// A cell is either none, some(nought), or some(cross).
-typealias CellValue = Player?
+public typealias CellValue = Player?
 
-struct FinishedState {
-    var winner: Winner
+public struct FinishedState {
+    public var winner: Winner
 }
 
 /// Either none (draw) or some(which player won).
-typealias Winner = Player?
+public typealias Winner = Player?

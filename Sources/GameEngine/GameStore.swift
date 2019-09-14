@@ -1,7 +1,7 @@
 import ReSwift
 
-class MainStore: Store<AppState> {
-    init() {
+public class MainStore: Store<AppState> {
+    public init() {
         super.init(
             reducer: mainReducer,
             state: nil)

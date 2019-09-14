@@ -1,8 +1,13 @@
 import ReSwift
 
-struct PlacePieceAction: Action {
+public struct PlacePieceAction: Action {
+    public init(at index: Int) {
+        self.index = index
+    }
+
     let index: Int
 }
 
-struct RestartGameAction: Action {
+public struct RestartGameAction: Action {
+    public init() {}
 }

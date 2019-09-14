@@ -45,7 +45,7 @@ final class GameEngineSpec: QuickSpec {
 
         describe("Playing a valid move as noughts") {
             let store = MainStore()
-            store.dispatch(PlacePieceAction(index: 0))
+            store.dispatch(PlacePieceAction(at: 0))
             
             expectPlaying(gameState: store.state.gameState) { playingState in
                 for (i, cell) in playingState.board.enumerated() {
@@ -68,8 +68,8 @@ final class GameEngineSpec: QuickSpec {
 
         describe("Playing a valid move as crosses") {
             let store = MainStore()
-            store.dispatch(PlacePieceAction(index: 0))
-            store.dispatch(PlacePieceAction(index: 1))
+            store.dispatch(PlacePieceAction(at: 0))
+            store.dispatch(PlacePieceAction(at: 1))
 
             expectPlaying(gameState: store.state.gameState) { playingState in
                 for (i, cell) in playingState.board.enumerated() {
@@ -96,8 +96,8 @@ final class GameEngineSpec: QuickSpec {
 
         describe("Playing an invalid move as crosses") {
             let store = MainStore()
-            store.dispatch(PlacePieceAction(index: 1))
-            store.dispatch(PlacePieceAction(index: 1))
+            store.dispatch(PlacePieceAction(at: 1))
+            store.dispatch(PlacePieceAction(at: 1))
 
             expectPlaying(gameState: store.state.gameState) { playingState in
                 for (i, cell) in playingState.board.enumerated() {
@@ -120,11 +120,11 @@ final class GameEngineSpec: QuickSpec {
 
         describe("Playing 3 noughts in a horizontal row (1)") {
             let store = MainStore()
-            store.dispatch(PlacePieceAction(index: 0)) // nought: [0, 0]
-            store.dispatch(PlacePieceAction(index: 4)) // cross:  [1, 0]
-            store.dispatch(PlacePieceAction(index: 1)) // nought: [0, 1]
-            store.dispatch(PlacePieceAction(index: 6)) // cross:  [1, 2]
-            store.dispatch(PlacePieceAction(index: 2)) // nought: [0, 0]
+            store.dispatch(PlacePieceAction(at: 0)) // nought: [0, 0]
+            store.dispatch(PlacePieceAction(at: 4)) // cross:  [1, 0]
+            store.dispatch(PlacePieceAction(at: 1)) // nought: [0, 1]
+            store.dispatch(PlacePieceAction(at: 6)) // cross:  [1, 2]
+            store.dispatch(PlacePieceAction(at: 2)) // nought: [0, 0]
 
             it("finishes the game and noughts win") {
                 expectFinised(gameState: store.state.gameState) { finishedState in
@@ -135,12 +135,12 @@ final class GameEngineSpec: QuickSpec {
 
         describe("Playing 3 crosses in a horizontal row") {
             let store = MainStore()
-            store.dispatch(PlacePieceAction(index: 0)) // nought: [0, 0]
-            store.dispatch(PlacePieceAction(index: 3)) // cross:  [1, 0]
-            store.dispatch(PlacePieceAction(index: 1)) // nought: [0, 1]
-            store.dispatch(PlacePieceAction(index: 4)) // cross:  [1, 1]
-            store.dispatch(PlacePieceAction(index: 8)) // nought: [2, 2]
-            store.dispatch(PlacePieceAction(index: 5)) // nought: [1, 2]
+            store.dispatch(PlacePieceAction(at: 0)) // nought: [0, 0]
+            store.dispatch(PlacePieceAction(at: 3)) // cross:  [1, 0]
+            store.dispatch(PlacePieceAction(at: 1)) // nought: [0, 1]
+            store.dispatch(PlacePieceAction(at: 4)) // cross:  [1, 1]
+            store.dispatch(PlacePieceAction(at: 8)) // nought: [2, 2]
+            store.dispatch(PlacePieceAction(at: 5)) // nought: [1, 2]
 
             it("finishes the game and noughts win") {
                 expectFinised(gameState: store.state.gameState) { finishedState in
@@ -151,12 +151,12 @@ final class GameEngineSpec: QuickSpec {
 
         describe("Playing 3 crosses in a vertical row") {
             let store = MainStore()
-            store.dispatch(PlacePieceAction(index: 0)) // nought: [0, 0]
-            store.dispatch(PlacePieceAction(index: 2)) // cross: [0, 2]
-            store.dispatch(PlacePieceAction(index: 1)) // nought: [0, 1]
-            store.dispatch(PlacePieceAction(index: 5)) // cross: [1, 2]
-            store.dispatch(PlacePieceAction(index: 6)) // nought: [2, 0]
-            store.dispatch(PlacePieceAction(index: 8)) // cross: [2, 2]
+            store.dispatch(PlacePieceAction(at: 0)) // nought: [0, 0]
+            store.dispatch(PlacePieceAction(at: 2)) // cross: [0, 2]
+            store.dispatch(PlacePieceAction(at: 1)) // nought: [0, 1]
+            store.dispatch(PlacePieceAction(at: 5)) // cross: [1, 2]
+            store.dispatch(PlacePieceAction(at: 6)) // nought: [2, 0]
+            store.dispatch(PlacePieceAction(at: 8)) // cross: [2, 2]
 
             it("finishes the game and crosses win") {
                 expectFinised(gameState: store.state.gameState) { finishedState in
@@ -167,12 +167,12 @@ final class GameEngineSpec: QuickSpec {
 
         describe("Playing 3 diagonal noughts") {
             let store = MainStore()
-            store.dispatch(PlacePieceAction(index: 2)) // nought: [0, 2]
-            store.dispatch(PlacePieceAction(index: 2)) // cross: invalid
-            store.dispatch(PlacePieceAction(index: 1)) // cross: [0, 1]
-            store.dispatch(PlacePieceAction(index: 6)) // nought: [2, 0]
-            store.dispatch(PlacePieceAction(index: 0)) // nought: [0, 0]
-            store.dispatch(PlacePieceAction(index: 4)) // nought: [1, 1]
+            store.dispatch(PlacePieceAction(at: 2)) // nought: [0, 2]
+            store.dispatch(PlacePieceAction(at: 2)) // cross: invalid
+            store.dispatch(PlacePieceAction(at: 1)) // cross: [0, 1]
+            store.dispatch(PlacePieceAction(at: 6)) // nought: [2, 0]
+            store.dispatch(PlacePieceAction(at: 0)) // nought: [0, 0]
+            store.dispatch(PlacePieceAction(at: 4)) // nought: [1, 1]
 
             it("finishes the game and noughts win") {
                 expectFinised(gameState: store.state.gameState) { finishedState in
@@ -183,15 +183,15 @@ final class GameEngineSpec: QuickSpec {
 
         describe("Filling up the board with no winners") {
             let store = MainStore()
-            store.dispatch(PlacePieceAction(index: 1)) // 0
-            store.dispatch(PlacePieceAction(index: 0)) // x
-            store.dispatch(PlacePieceAction(index: 3)) // 0
-            store.dispatch(PlacePieceAction(index: 2)) // x
-            store.dispatch(PlacePieceAction(index: 4)) // 0
-            store.dispatch(PlacePieceAction(index: 5)) // x
-            store.dispatch(PlacePieceAction(index: 6)) // 0
-            store.dispatch(PlacePieceAction(index: 7)) // x
-            store.dispatch(PlacePieceAction(index: 8)) // 0
+            store.dispatch(PlacePieceAction(at: 1)) // 0
+            store.dispatch(PlacePieceAction(at: 0)) // x
+            store.dispatch(PlacePieceAction(at: 3)) // 0
+            store.dispatch(PlacePieceAction(at: 2)) // x
+            store.dispatch(PlacePieceAction(at: 4)) // 0
+            store.dispatch(PlacePieceAction(at: 5)) // x
+            store.dispatch(PlacePieceAction(at: 6)) // 0
+            store.dispatch(PlacePieceAction(at: 7)) // x
+            store.dispatch(PlacePieceAction(at: 8)) // 0
             
              it("finishes the game with a draw") {
                  expectFinised(gameState: store.state.gameState) { finishedState in
@@ -202,11 +202,11 @@ final class GameEngineSpec: QuickSpec {
 
         describe("A finished game state, when restarted,") {
             let store = MainStore()
-            store.dispatch(PlacePieceAction(index: 0))
-            store.dispatch(PlacePieceAction(index: 3))
-            store.dispatch(PlacePieceAction(index: 1))
-            store.dispatch(PlacePieceAction(index: 4))
-            store.dispatch(PlacePieceAction(index: 2))
+            store.dispatch(PlacePieceAction(at: 0))
+            store.dispatch(PlacePieceAction(at: 3))
+            store.dispatch(PlacePieceAction(at: 1))
+            store.dispatch(PlacePieceAction(at: 4))
+            store.dispatch(PlacePieceAction(at: 2))
 
             expectFinised(gameState: store.state.gameState) { finishedState in
                 store.dispatch(RestartGameAction())
